@@ -1,0 +1,27 @@
+POST http://localhost:8081/api/auth/login
+Content-Type: application/json
+
+{
+"username": "vasya",
+"password": "123"
+}
+###
+
+###
+WEBSOCKET ws://localhost:8081/ws/chat
+Content-Type: application/json
+
+{
+"sender": "vasya",
+"content": "Всем привет! Это мое первое сообщение, которое сохранится в БД!"
+}
+###
+WEBSOCKET ws://localhost:8081/ws/chat
+Content-Type: application/json
+
+{
+"sender": "petya",
+"content": "А это второе, чисто для теста."
+}
+###
+GET http://localhost:8081/api/messages/history

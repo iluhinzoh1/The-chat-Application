@@ -12,31 +12,53 @@
 
     <artifactId>chat-client</artifactId>
 
-    <dependencies>
-        <!-- Зависимость от серверного модуля (включает все его зависимости) -->
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>chat-server</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <javafx.version>21.0.1</javafx.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
-        <!-- JavaFX зависимости -->
+    <dependencies>
+        <!-- Графические компоненты JavaFX (кнопки, окна) -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>21</version>
+            <version>${javafx.version}</version>
         </dependency>
+
+        <!-- Работа с разметкой интерфейса FXML -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>21</version>
+            <version>${javafx.version}</version>
         </dependency>
 
-        <!-- Тесты -->
+        <!-- Инструмент для парсинга JSON, чтобы клиент тоже понимал ответы сервера -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.15.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Плагин для удобного запуска JavaFX прямо из Maven -->
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <configuration>
+                    <mainClass>com.example.chatclient.ChatApplication</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
