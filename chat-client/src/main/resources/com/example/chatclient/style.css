@@ -1,0 +1,60 @@
+/* Основной фон окна */
+.root {
+    -fx-background-color: #f4f4f9;
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.button {
+-fx-background-color: #0088cc;
+-fx-text-fill: white;
+-fx-font-weight: bold;
+-fx-background-radius: 20px;
+-fx-border-radius: 20px;
+-fx-padding: 8px 20px;
+-fx-cursor: hand;
+}
+
+/* Эффект при наведении на кнопку */
+.button:hover {
+    -fx-background-color: #0077b3;
+}
+
+/* Поле ввода сообщения (нижнее) */
+.text-field {
+    -fx-background-color: white;
+    -fx-border-color: #d1d1e0;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-padding: 10px 15px;
+    -fx-font-size: 14px;
+}
+
+/* При нажатии на поле ввода (фокус) */
+.text-field:focused {
+    -fx-border-color: #0088cc;
+    -fx-border-width: 2px;
+}
+
+
+.text-area {
+-fx-background-color: white;
+-fx-font-size: 14px;
+-fx-padding: 10px;
+-fx-background-insets: 0;
+}
+
+.text-area .content {
+    -fx-background-color: white;
+}
+
+.list-view {
+-fx-background-color: #ffffff;
+-fx-border-color: #e6e6e6;
+-fx-border-width: 0 1px 0 0;
+-fx-font-size: 14px;
+}
+
+.list-view .list-cell:selected {
+    -fx-background-color: #e6f3ff;
+    -fx-text-fill: black;
+}

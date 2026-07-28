@@ -52,5 +52,21 @@ services:
       - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:29092
     depends_on:
       - kafka
+  chat-backend:
+    build: ./chat-server # Ищет Dockerfile в папке chat-server
+    container_name: spring_boot_server
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      # ВАЖНО: Внутри докера "localhost" не работает! Мы заменяем его на имена контейнеров.
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/chatdb
+      - SPRING_DATA_REDIS_HOST=redis
+      # Сервер внутри Докера стучится во внутреннюю "дверь" Кафки (29092)
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:29092
+    depends_on:
+      - postgres
+      - redis
+      - kafka
 volumes:
   pgdata:

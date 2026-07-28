@@ -18,11 +18,23 @@ public class UserService {
     // Встроенный инструмент Спринга для общения с Redis
     private final StringRedisTemplate redisTemplate;
 
-    public User loginOrRegister(String username, String password) {
+    public User loginOrRegister(String username, String password, String ip) {
         // 1. Ищем пользователя в PostgreSQL
         Optional<User> existingUser = userRepository.findByUsername(username);
         User user;
         if (existingUser.isEmpty()) {
+            String ipKey = "rate_limit:ip:" + ip;
+            String attempStr = redisTemplate.opsForValue().get(ipKey);
+            int attemps = (attempStr != null) ?  Integer.parseInt(attempStr) : 0;
+            if (attemps > 1) {
+                throw new RuntimeException("а больше одного ты не сделаешь другалек \n " +
+                        "волосатый ты пенёк");
+            }
+            redisTemplate.opsForValue().increment(ipKey);
+            // Если это первая попытка, ставим таймер на 24 часа
+            if (attemps == 0) {
+                redisTemplate.expire(ipKey, Duration.ofHours(24));
+            }
             // Если нет - создаем нового (Регистрация)
             user = User.builder()
                     .username(username)

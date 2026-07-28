@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<!-- VBox располагает элементы вертикально (сверху вниз) -->
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.PasswordField?>
+<VBox alignment="CENTER" spacing="15.0"
+      xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.chatclient.LoginController">
+
+    <Label text="Ламповый Чатик">
+        <font>
+            <Font name="System Bold" size="18.0" />
+        </font>
+    </Label>
+
+    <TextField fx:id="usernameField" promptText="Введите логин" maxWidth="200.0"/>
+
+    <!-- НОВОЕ: Поле для пароля (скрывает символы звездочками) -->
+    <PasswordField fx:id="passwordField" promptText="Введите пароль" maxWidth="200.0" onAction="#onLoginButtonClick"/>
+
+    <!-- НОВОЕ: Место для вывода ошибок (красным цветом) -->
+    <Label fx:id="errorLabel" textFill="RED" wrapText="true"/>
+
+    <Button text="Войти" onAction="#onLoginButtonClick" prefWidth="150.0"/>
+
+</VBox>

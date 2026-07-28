@@ -3,6 +3,7 @@ package com.example.chatserver.controller;
 import com.example.chatserver.Entity.User;
 import com.example.chatserver.dto.AuthRequest;
 import com.example.chatserver.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +16,11 @@ public class AuthController {
     private final UserService userService;
     // Этот метод будет принимать POST-запросы на адрес http://localhost:8081/api/auth/login
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody AuthRequest request) {
+    public ResponseEntity<?> login(@RequestBody AuthRequest request, HttpServletRequest httpServletRequest) {
         try {
             // Передаем данные из JSON в наш сервис
-            User user = userService.loginOrRegister(request.getUsername(), request.getPassword());
+            String ip = httpServletRequest.getRemoteAddr();
+            User user = userService.loginOrRegister(request.getUsername(), request.getPassword(), ip);
             // Возвращаем данные пользователя в ответ (HTTP 200 OK)
             return ResponseEntity.ok(user);
         } catch (Exception e) {

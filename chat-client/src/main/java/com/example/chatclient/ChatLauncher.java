@@ -1,3 +1,5 @@
+package com.example.chatclient;
+
 import javafx.application.Application;
 
 public class ChatLauncher {
