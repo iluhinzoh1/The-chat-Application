@@ -57,7 +57,7 @@ public class LoginController {
                             openChatWindow(username);
                         } else {
                             errorLabel.setStyle("-fx-text-fill: red;");
-                            errorLabel.setText("Ошибка: " + response.statusCode());
+                            errorLabel.setText("братулец, больше 1 аккаунта не сделаешь");
                         }
                     });
                 })

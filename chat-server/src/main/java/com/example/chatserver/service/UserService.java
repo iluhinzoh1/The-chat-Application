@@ -26,7 +26,7 @@ public class UserService {
             String ipKey = "rate_limit:ip:" + ip;
             String attempStr = redisTemplate.opsForValue().get(ipKey);
             int attemps = (attempStr != null) ?  Integer.parseInt(attempStr) : 0;
-            if (attemps > 1) {
+            if (attemps > 0) {
                 throw new RuntimeException("а больше одного ты не сделаешь другалек \n " +
                         "волосатый ты пенёк");
             }
@@ -38,7 +38,7 @@ public class UserService {
             // Если нет - создаем нового (Регистрация)
             user = User.builder()
                     .username(username)
-                    .password(password) // В реальном проекте пароли шифруют (BCrypt), но мы пока упрощаем
+                    .password(password)
                     .build();
             user = userRepository.save(user);
         } else {
